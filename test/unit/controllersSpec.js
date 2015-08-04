@@ -11,6 +11,6 @@ describe('clubLeagueManager controllers', function() {
     });
   });
 
-  beforeEach(module('clubLeagueManagerApp'));
+  beforeEach(module('clubLeagueManager'));
   beforeEach(module('clubLeagueManagerServices'));
 });

@@ -8,13 +8,13 @@ describe('directives', function() {
 	var $location;
 
 	// load modules
-	beforeEach(module('clubLeagueManagerApp'));
+	beforeEach(module('clubLeagueManager'));
 
 	beforeEach( inject( function( _$rootScope_, _$location_) {
 		// create a new local scope for this test
 		$scope = _$rootScope_.$new();
 		$location = _$location_;
-		spyOn($location, 'path').andReturn('#/abc');
+		spyOn($location, 'path').and.returnValue('#/abc');
 	} ) );
 
 	describe( 'bs-active-link: Set active class for active element depending on route', function() {

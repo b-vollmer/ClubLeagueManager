@@ -3,10 +3,10 @@
 describe('service', function() {
 
   // load modules
-  beforeEach(module('clubLeagueManagerApp'));
+  beforeEach(module('clubLeagueManager'));
 
   // Test service availability
-  it('check the existence of Data factory', inject(function(Games) {
-      expect(Games).toBeDefined();
+  it('check the existence of LeaguesService factory', inject(function(LeaguesService) {
+      expect(LeaguesService).toBeDefined();
     }));
 });
