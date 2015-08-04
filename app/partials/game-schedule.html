@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="page-header">
+    <h1>Game Schedule: {{leagueName}}</h1>
+  </div>
+
+  <spinner enabled="spinnerEnabled"></spinner>
+
+  <!-- Table -->
+  <table class="table table-hover" ng-if="games != null">
+    <thead>
+    <tr>
+      <th ng-click="changeSorting()" style="cursor:pointer;">
+        Day
+        <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span>
+      </th>
+      <th>Home</th><th>Visitor
+    </th><th colspan="2">Result</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="game in games | filter:leagueName | orderBy:sort.column:sort.descending" ng-class-odd="'odd'" ng-class-even="'even'">
+        <td>
+          {{game.SpielVon | date:'dd.MM.yyyy HH:mm'}}
+        </td>
+        <td ng-class="{highlight: game.Heim==favoriteClub}">
+          {{game.Heim}}
+        </td>
+        <td ng-class="{highlight: game.Gast==favoriteClub}">
+          {{game.Gast}}
+        </td>
+        <td class="text-center">
+          {{game.Tore1 + ":" + game.Tore2}}
+        </td>
+        <td>
+          <a open-game-details style="cursor: pointer"><span class="glyphicon glyphicon-info-sign"
+                 aria-hidden="true"></span></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- see open-game-details directive -->
+  <game-details></game-details>
+
+  <div class="alert alert-danger" role="alert" ng-if="failedGames">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    For the selected team there is no game schedule available yet.
+  </div>
+</div>

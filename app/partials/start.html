@@ -1,0 +1,54 @@
+<div class="container" >
+  <div class="page-header">
+    <h1>Welcome to ClubLeagueManager App</h1>
+  </div>
+  <div class="well">Welcome ClubLeagueManager App. You can select a favorite team and its
+    correspondent league from the available club team league database.
+    <br /><br />
+    <p ng-if="favoriteTeam != null">
+      Your current favorite selected team is <strong>{{favoriteTeam.Liganame}} ({{favoriteTeam.Vereinsname}})</strong>.
+    </p>
+    <p>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal"
+              data-target="#teamSelectionModal">
+        Change favorite Team
+      </button>
+    </p>
+  </div>
+
+  <div class="alert alert-danger" role="alert" ng-if="favoriteTeam == null || teamsFailed">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    You have not selected a favorite team yet.
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="teamSelectionModal" tabindex="-1" role="dialog"
+       aria-labelledby="teamSelectionModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" reset-favorite-team aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="teamSelectionModalLabel">Select your favorite team</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="teamSelect">Favorite league / team</label>
+              <select class="form-control" id="teamSelect" ng-model="favoriteTeam"
+                      ng-options="league.Liganame for league in teamLeagues track by league.Liganame" >
+                <option value="">-- Choose Team / League --</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" reset-favorite-team>Close</button>
+          <button type="button" class="btn btn-primary" update-favorite-team>Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

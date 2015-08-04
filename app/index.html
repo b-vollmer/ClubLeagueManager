@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" ng-app="clubLeagueManager">
+<head>
+  <meta charset="utf-8">
+  <title>ClubLeagueManager App</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-local-storage/angular-local-storage.min.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/x2js/xml2json.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/directives.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#/start/">ClubLeagueManager</a>
+      </div>
+      <div id="bs-example-navbar-collapse-6" class="collapse navbar-collapse"
+           ng-controller="HeaderCtrl">
+        <ul class="nav navbar-nav" bs-active-link>
+          <li>
+            <a href="#/start">
+              <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="#/table">
+              <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+              Ranking
+            </a>
+          </li>
+          <li>
+          <a href="#/games">
+            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+            Game Schedule
+          </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="view-container">
+    <div ng-view class="view-frame"></div>
+  </div>
+
+</body>
+</html>

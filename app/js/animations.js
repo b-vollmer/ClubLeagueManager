@@ -1,0 +1,1 @@
+var clubLeagueManagerAnimations = angular.module('clubLeagueManagerAnimations', ['ngAnimate']);

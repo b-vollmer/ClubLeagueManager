@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="page-header">
+    <h1>Current Ranking: {{leagueName}}</h1>
+  </div>
+
+  <spinner enabled="spinnerEnabled"></spinner>
+
+  <!-- Table -->
+  <table class="table table-bordered table-hover table-condensed" ng-if="table != null && leagueData != null">
+    <thead>
+    <tr>
+      <th>Position</th>
+      <th>Club</th>
+      <th class="text-center">Games</th>
+      <th class="text-center">W-T-L</th>
+      <th class="text-center">Goals</th>
+      <th class="text-center">Points</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="entry in table" ng-class-odd="'odd'" ng-class-even="'even'" ng-class="{'success': ($index+1)<=leagueData.Aufstiegsplaetze, 'warning': ($index+1)>(leagueData.Mannschaften - leagueData.Abstiegsplaetze)}">
+      <td>
+        {{entry.Nr}}
+          <span ng-if="($index+1)<=leagueData.Aufstiegsplaetze" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+          <span ng-if="($index+1)>(leagueData.Mannschaften - leagueData.Abstiegsplaetze)"
+                class="glyphicon glyphicon-arrow-down"
+                aria-hidden="true"></span>
+      </td>
+      <td ng-class="{highlight: entry.Name==favoriteClub}">
+        {{entry.Name}}
+      </td>
+      <td class="text-center">
+        {{entry.Spiele}}/{{entry.SpieleInsgesamt}}
+      </td>
+      <td class="text-center">
+        {{entry.Gewonnen + "-" + entry.Unentschieden + "-" + entry.Verloren }}
+      </td>
+      <td class="text-center">
+        {{entry.TorePlus + ":" + entry.ToreMinus}}
+      </td>
+      <td class="text-center">
+        {{entry.PunktePlus + ":" + entry.PunkteMinus}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-danger" role="alert" ng-if="failedTable">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    For the selected team there is no table data available yet.
+  </div>
+</div>

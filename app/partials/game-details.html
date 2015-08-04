@@ -1,0 +1,62 @@
+<!-- Modal -->
+<div ng-controller="GameDetailsCtrl" class="modal fade" id="gameDetailsModal" tabindex="-1" role="dialog"
+     aria-labelledby="gameDetailsModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Game Details</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <h3>{{game.Heim}} - {{game.Gast}}
+              <span ng-show="(game.Tore1 + game.Tore2) > 0">
+                {{game.Tore1 + ":" + game.Tore2}} ({{game.Tore01 + ":" + game.Tore02}})
+              </span>
+              </h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <strong>Zeit:</strong>
+            </div>
+            <div class="col-md-4">
+              {{game.SpielVon | date:'dd.MM.yyyy HH:mm'}} Uhr
+            </div>
+            <div class="col-md-2">
+              <strong>Halle:</strong>
+            </div>
+            <div class="col-md-4">
+              <address>
+              {{game.HallenName}} <br />
+              {{game.HallenStrasse}} <br />
+              {{game.HallenOrt}}
+              </address>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <strong>Schiedsrichter:</strong>
+            </div>
+            <div class="col-md-10">
+              {{game.GespannName}}
+            </div>
+          </div>
+          <div class="row" ng-show="game.Anmerkung.length > 0">
+            <div class="col-md-2">
+              <strong>Info:</strong>
+            </div>
+            <div class="col-md-10">
+              {{game.Anmerkung}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
