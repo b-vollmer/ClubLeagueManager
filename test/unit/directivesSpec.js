@@ -4,36 +4,49 @@
 
 describe('directives', function() {
 
-	var $scope;
-	var $location;
+	var  $rootScope, $scope, $location, $compile;
 
 	// load modules
 	beforeEach(module('clubLeagueManager'));
 
-	beforeEach( inject( function( _$rootScope_, _$location_) {
-		// create a new local scope for this test
-		$scope = _$rootScope_.$new();
+	beforeEach( inject( function(_$compile_, _$rootScope_, _$location_) {
+		$compile = _$compile_;
 		$location = _$location_;
-		spyOn($location, 'path').and.returnValue('#/abc');
+		$rootScope = _$rootScope_;
+		// create a new local child scope for this test
+		$scope = _$rootScope_.$new();
+
 	} ) );
 
 	describe( 'bs-active-link: Set active class for active element depending on route', function() {
-		var element;
-		var elementTemplate;
 
-		beforeEach(function() {
-			elementTemplate = '<ul class="nav navbar-nav" bs-active-link><li><a href="#/abc" class="abc">ABC</a></li></ul>';
-			element = angular.element(elementTemplate);
-		});
+		var elementTpl = '<div><ul class="nav navbar-nav" bs-active-link><li><a href="/abc">ABC</a></li></ul></div>';
 
-		beforeEach( inject( function( _$compile_, $location ) {
-			element = _$compile_( element )( $scope );
-			$scope.$digest();
-		} ) );
+		it( 'link should be marked active after route changed event', inject(function() {
+			spyOn($location, "path").and.returnValue("/abc");
 
-		it( 'should be active', function() {
-			expect( element.find( 'a' )).toBe(true);
-			//expect( element.find('ol' ).find( 'a' ).hasClass('active') ).toBe(false);
-		} );
+			var element = $compile(elementTpl)($scope);
+			$scope.$apply();
+
+			expect( $location.path() ).toBe('/abc');
+			expect( element.find( 'a' ).attr('href')).toBeDefined();
+			expect( element.find( 'li' ).attr('class')).not.toBeDefined();
+
+			$rootScope.$broadcast('$routeChangeSuccess', {});
+
+			expect( element.find( 'li' ).attr('class')).toBeDefined();
+			expect( element.find( 'li' ).hasClass('active') ).toBe(true);
+		}));
+
+		it( 'link should not be marked active after route changed event', inject(function() {
+			spyOn($location, "path").and.returnValue("/xyz");
+
+			var element = $compile(elementTpl)($scope);
+			$scope.$apply();
+
+			$rootScope.$broadcast('$routeChangeSuccess', {});
+
+			expect( element.find( 'li' ).hasClass('active') ).not.toBe(true);
+		}));
 	});
 });
