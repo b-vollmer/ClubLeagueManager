@@ -4,10 +4,10 @@
 
 var clubLeagueManagerServices = angular.module('clubLeagueManagerServices', []);
 
-clubLeagueManagerServices.factory('LeaguesService', function($http, $q){
+clubLeagueManagerServices.factory('LeaguesService', function($http, $q, config){
 
 	function getAllTeamLeagues() {
-		return $http.get( 'games/club-championships.xml', {
+		return $http.get( config.backend + 'club-championships.xml', {
 		} ).then( function( response ) {
 			var x2js = new X2JS();
 			var json = x2js.xml_str2json( response.data );
@@ -22,7 +22,7 @@ clubLeagueManagerServices.factory('LeaguesService', function($http, $q){
 	}
 
 	function getAllGames() {
-		return $http.get( 'games/gsp-1516.xml', {
+		return $http.get( config.backend + 'gsp-1516.xml', {
 		} ).then( function( response ) {
 			var x2js = new X2JS( {
 				datetimeAccessFormPaths: ["AlleSpiele.Spiel.SpielDatum", "AlleSpiele.Spiel.SpielVon", "AlleSpiele.Spiel.SpielBis"]
@@ -39,7 +39,7 @@ clubLeagueManagerServices.factory('LeaguesService', function($http, $q){
 	}
 
 	function getTabForLeague(league) {
-		return $http.get( "games/tab-"+league+".xml", {
+		return $http.get( config.backend + "tab-"+league+".xml", {
 		} ).then( function( response ) {
 			var x2js = new X2JS();
 			var json = x2js.xml_str2json( response.data );

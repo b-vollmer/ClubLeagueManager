@@ -5,13 +5,14 @@ describe('clubLeagueManager controllers', function() {
 
   beforeEach(module('clubLeagueManager'));
   beforeEach(module('clubLeagueManagerServices'));
+  beforeEach(module('clubLeagueManagerConfiguration'));
 
   describe('HomeCtrl', function(){
     var scope, ctrl, $httpBackend;
 
-    beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+    beforeEach(inject(function(_$httpBackend_, $rootScope, $controller, config) {
       $httpBackend = _$httpBackend_;
-      $httpBackend.expectGET('games/club-championships.xml').
+      $httpBackend.expectGET(config.backend + 'club-championships.xml').
         respond('<Gespanne><Mannschaften><Liganame>1. Bundesliga</Liganame><Vereinsname>SV Werder</Vereinsname></Mannschaften><Mannschaften><Liganame>2. Bundesliga</Liganame><Vereinsname>HSV</Vereinsname></Mannschaften></Gespanne>');
 
       scope = $rootScope.$new();
@@ -20,7 +21,7 @@ describe('clubLeagueManager controllers', function() {
 
 
     it('should create "teamLeagues" model with 2 teamleagues fetched from xhr', function() {
-      expect(scope.teamLeagues).toEqualData([]);
+      expect(scope.teamLeagues).not.toBeDefined();
       $httpBackend.flush();
 
       expect(scope.teamLeagues).toEqual(
