@@ -11,6 +11,8 @@ module.exports = function(config){
       'app/bower_components/angular-animate/angular-animate.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-local-storage/dist/angular-local-storage.js',
+      'app/bower_components/bootstrap/dist/js/bootstrap.js',
+      'app/bower_components/x2js/xml2json.js',
       'app/js/**/*.js',
       'test/unit/**/*.js'
     ],

@@ -30,6 +30,7 @@ describe('directives', function() {
 
 			expect( $location.path() ).toBe('/abc');
 			expect( element.find( 'a' ).attr('href')).toBeDefined();
+			expect( element.find( 'a' ).attr('href')).toBe("/abc");
 			expect( element.find( 'li' ).attr('class')).not.toBeDefined();
 
 			$rootScope.$broadcast('$routeChangeSuccess', {});
